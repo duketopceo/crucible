@@ -15,6 +15,7 @@ All notable changes. Format: Keep a Changelog; semver for the `crucible` package
 - Fixed `index/FILE_INDEX.yaml` coverage; excluded `__init__.py` and `uv.lock` from the index gate.
 - Standardized env vars (`CRUCIBLE_*`) and event envelope (`simulation_run_id` prefix `sim-`).
 - Added Kaggle casting license finding (CC BY-NC-ND) to `docs/seed-data-research.md`.
+- Added `LEARNING.md`: general teaching scope for the project domain.
 
 ## [0.1.0] — 2026-08-30
 

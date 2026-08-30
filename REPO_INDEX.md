@@ -16,6 +16,7 @@ Start here. Read top-to-bottom before editing anything.
 | `AGENTS.md` | Agent operating rules | low |
 | `README.md` | Project overview, honest claims policy | low |
 | `ROADMAP.md` | Build plan: milestones, work orders, portfolio presentation | low |
+| `LEARNING.md` | Teaching scope for understanding the project domain | low |
 | `index/` | Generated file index, schema index, event index, agent navigation | medium (generated) |
 | `docs/` | Architecture, process, provenance, assumptions, work orders, ADRs | low |
 | `config/` | Versioned factory model, recipes, defect model, reliability profiles | **high** — parameters drive simulation output |

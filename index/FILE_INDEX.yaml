@@ -48,6 +48,14 @@ entries:
     breaks_if_changed: []
     verification: []
 
+  - path: LEARNING.md
+    purpose: General teaching scope for the project domain — investment casting, DES, ISA-95, industrial protocols, provenance, digital twin.
+    version: v0.1.0
+    last_reviewed: 2026-08-30T00:00:00Z
+    change_risk: low
+    breaks_if_changed: []
+    verification: []
+
   - path: LICENSE
     purpose: MIT license.
     version: v0.1.0
