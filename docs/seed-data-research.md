@@ -38,6 +38,8 @@ Do not rename source labels into turbine-blade defect labels. If a portfolio dis
 
 ## Kaggle casting imagery handling
 
+**License finding:** the Kaggle casting-product dataset (7,348 grayscale images of submersible-pump impellers, 300×300) is distributed under **CC BY-NC-ND** — non-commercial, no-derivatives. That makes it effectively off-limits for a portfolio you may monetize or repurpose. Treat it as a non-commercial, read-only demonstration only, or drop it. Do not bundle or redistribute it.
+
 This is optional and should wait until the core factory route, genealogy, and quality workflow are working. It may enrich a simulated inspection cell:
 
 ```text

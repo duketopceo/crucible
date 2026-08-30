@@ -98,7 +98,7 @@ Use dedicated registries for high-impact contracts:
 - `index/EVENT_INDEX.yaml` — event types, producer/consumer ownership, version, payload schema
 - `docs/assumptions-register.md` — uncertain or synthetic parameter decisions
 - `docs/data-provenance.md` — external datasets, transformations, and license/terms records
-- `docs/architecture.md` and `docs/adr/` — architectural decisions and rationale
+- `docs/technical-research-foundation.md` and `docs/adr/` — architectural decisions and rationale
 
 An event, schema, or metric change is incomplete unless the relevant registry changes in the same PR.
 

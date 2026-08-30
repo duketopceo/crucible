@@ -1,18 +1,45 @@
-# Crucible (Archify Foundry Twin)
+# Crucible
 
-> Crucible is a research-grounded synthetic manufacturing data platform that simulates a generic investment-casting reference line, preserves material genealogy, emits industrial-style events, and demonstrates quality and reliability decisions without claiming access to real factory data.
+> Crucible is a research-grounded synthetic industrial-data platform. Its first reference model, **Archify Foundry Twin**, simulates a generic investment-casting line, preserves material genealogy, emits industrial-style events, and demonstrates quality and reliability decisions — without claiming access to real factory data.
 
-**Status:** Milestone 0 — repository control plane.
+[![CI](https://github.com/duketopceo/crucible/actions/workflows/ci.yml/badge.svg)](https://github.com/duketopceo/crucible/actions/workflows/ci.yml)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue.svg)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Status: M1](https://img.shields.io/badge/status-M1%20research%20%26%20spec-orange.svg)](ROADMAP.md)
+
+**Status:** Milestone 1 — research and factory specification. The deterministic simulation core (M2) is next.
 
 ## Why this exists
 
-Portfolio demonstration of industrial IT, data-pipeline, and quality-systems competence: discrete-event simulation, ISA-95-aligned modeling, material genealogy/traceability, industrial transport (MQTT), provenance-preserving ingestion, and BI with full event-to-decision traceability.
+A portfolio demonstration of industrial IT, data-pipeline, and quality-systems competence: discrete-event simulation, ISA-95-aligned modeling, material genealogy and traceability, industrial transport (MQTT), provenance-preserving ingestion, and BI with full event-to-decision traceability.
 
 The motivating context is turbine-blade investment casting (SpaceX is building a foundry), but the modeled factory is a **generic reference line**. No output represents SpaceX or any real foundry.
 
-## Architecture (one paragraph)
+## Naming
 
-A deterministic, stochastic discrete-event simulation (SimPy, Python) owns all process truth: routing, queues, station capacity, equipment state, telemetry, quality outcomes, and disposition. Selected events are published over MQTT, ingested into an append-only raw store, and modeled into rebuildable operational tables. BI views answer: where is WIP, what is constraining throughput, what caused quality holds, which lots are affected by a deviation — every number traceable to a simulation run, model version, seed, and parameter profile.
+- **Crucible** — the platform and Python package (`crucible`).
+- **Archify Foundry Twin** — the first reference model built on it (`site_id: archify-reference-01`).
+
+## Architecture
+
+```mermaid
+flowchart TD
+    R[Research ledger + assumptions register] --> F[Versioned factory model + parameter profiles]
+    F --> S[Python discrete-event simulator<br/>routing · queues · resources · genealogy · quality]
+    S --> O[OPC UA simulator]
+    S --> M[MQTT event transport]
+    O --> E[Raw append-only event store]
+    M --> E
+    E --> T[Modeled operational / genealogy / quality tables]
+    T --> A[Analytics marts + read-only API + dashboard]
+    A --> L[Optional OpenRouter gateway]
+```
+
+Three defining rules:
+
+1. **Simulation code owns truth.** LLMs propose or explain; validators decide admissibility.
+2. **Every number is traceable** to an event, model version, seed, parameter profile, and evidence status.
+3. **Raw events are immutable; modeled tables are rebuildable** from raw events + versioned reference data.
 
 ## Quick start (M4+, not yet active)
 
@@ -24,11 +51,12 @@ make simulate   # offline, fixed seed, no services required
 
 ## Navigation
 
+- `ROADMAP.md` — the build plan: milestones, work orders, portfolio presentation.
 - `REPO_INDEX.md` — start here; maps every directory and key file.
 - `index/FILE_INDEX.yaml` — machine-readable per-file index (purpose, deps, break risk).
-- `docs/` — architecture, factory process, provenance policy, assumptions register, work orders.
+- `docs/` — technical research foundation, factory process, provenance, assumptions, work orders, QA/QC.
 - `config/` — versioned factory model, recipes, defect model, reliability profiles.
-- `src/archify/` — the Python package (domain, simulation, events, provenance, adapters).
+- `src/crucible/` — the Python package (domain, simulation, events, provenance, adapters).
 - `tests/` — unit, invariants, contract, integration, scenario.
 
 ## Honest claims policy
@@ -36,6 +64,10 @@ make simulate   # offline, fixed seed, no services required
 - **Verification** (did the code execute the defined model?) — yes, via invariant + golden-scenario tests.
 - **Validation** (does the model match a real factory?) — **not claimed.** No real factory data exists here.
 - **Uncertainty** — parameter profiles vary assumptions; metrics report sensitivity, not asserted truth.
+
+## Screenshots
+
+There is no running dashboard yet — analytics and the embedded dashboard land in M6. A screenshot of the incident walkthrough will be added here when it exists. Fabricating one now would violate this project's own honest-claims policy.
 
 ## License
 

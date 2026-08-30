@@ -15,17 +15,18 @@ Start here. Read top-to-bottom before editing anything.
 |---|---|---|
 | `AGENTS.md` | Agent operating rules | low |
 | `README.md` | Project overview, honest claims policy | low |
+| `ROADMAP.md` | Build plan: milestones, work orders, portfolio presentation | low |
 | `index/` | Generated file index, schema index, event index, agent navigation | medium (generated) |
 | `docs/` | Architecture, process, provenance, assumptions, work orders, ADRs | low |
 | `config/` | Versioned factory model, recipes, defect model, reliability profiles | **high** — parameters drive simulation output |
-| `src/archify/domain/` | Core entities: lots, serials, work orders, assets, holds | **high** |
-| `src/archify/simulation/` | SimPy engine: routing, queues, resources, genealogy | **high** |
-| `src/archify/quality/` | Defect risk, inspection, disposition logic | **high** |
-| `src/archify/reliability/` | Equipment health, degradation, failure sampling | **high** |
-| `src/archify/genealogy/` | Lot/serial lineage graph and containment | **high** |
-| `src/archify/events/` | Canonical envelope, event types, append-only log | **high** |
-| `src/archify/provenance/` | Provenance fields, run manifest, source registry | **high** |
-| `src/archify/adapters/` | MQTT/OPC UA adapters (M4+) | medium |
+| `src/crucible/domain/` | Core entities: lots, serials, work orders, assets, holds | **high** |
+| `src/crucible/simulation/` | SimPy engine: routing, queues, resources, genealogy | **high** |
+| `src/crucible/quality/` | Defect risk, inspection, disposition logic | **high** |
+| `src/crucible/reliability/` | Equipment health, degradation, failure sampling | **high** |
+| `src/crucible/genealogy/` | Lot/serial lineage graph and containment | **high** |
+| `src/crucible/events/` | Canonical envelope, event types, append-only log | **high** |
+| `src/crucible/provenance/` | Provenance fields, run manifest, source registry | **high** |
+| `src/crucible/adapters/` | MQTT/OPC UA adapters (M4+) | medium |
 | `services/` | Deployable services: simulator runner, ingest, API | medium |
 | `schemas/` | JSON event schemas, SQL DDL | **high** |
 | `migrations/` | Append-only DB migrations | **high** — never edit applied migrations |
@@ -63,8 +64,10 @@ make indexes        # regenerate index/FILE_INDEX.yaml
 
 ## Milestones
 
-- **M0 — repo control plane** (this commit)
+- **M0 — repo control plane** (done)
+- **M1 — research and factory specification** (in progress)
 - **M2 — deterministic route + genealogy + invariants**
+- **M3 — stochastic process behavior** (critical path)
 - **M4 — MQTT transport + Postgres ingest + provenance**
 - **M6 — embedded dashboard + incident walkthrough**
-- Deferred: stochastic profiles (M3), external seed data (M5), OpenRouter layer (M7), industrial comparison (M8)
+- Deferred: external seed data (M5), OpenRouter layer (M7), industrial comparison (M8)

@@ -40,6 +40,14 @@ entries:
     breaks_if_changed: []
     verification: []
 
+  - path: CONTRIBUTING.md
+    purpose: Contribution workflow and non-negotiables; points to AGENTS.md and the file-index contract.
+    version: v0.1.0
+    last_reviewed: 2026-08-30T00:00:00Z
+    change_risk: low
+    breaks_if_changed: []
+    verification: []
+
   - path: LICENSE
     purpose: MIT license.
     version: v0.1.0
@@ -106,13 +114,61 @@ entries:
     breaks_if_changed: [agent routing for new tasks]
     verification: []
 
-  - path: docs/architecture.md
-    purpose: Layered architecture, defining rules, source-of-truth hierarchy, ISA-95 alignment.
+  - path: ROADMAP.md
+    purpose: Build plan — executive decision, architecture summary, six-station factory model, milestones (M0-M8), work-order map, portfolio presentation.
     version: v0.1.0
     last_reviewed: 2026-08-30T00:00:00Z
     change_risk: low
-    breaks_if_changed: [architectural expectations in AGENTS.md and work orders]
+    breaks_if_changed: [milestone/work-order alignment across docs and issues]
     verification: []
+
+  - path: docs/technical-research-foundation.md
+    purpose: Technical baseline — research rationale, architecture decision, factory line, protocols, storage layers, canonical event envelope, seed policy, adapter contracts, container stack.
+    version: v0.1.0
+    last_reviewed: 2026-08-30T00:00:00Z
+    change_risk: medium
+    breaks_if_changed: [event envelope and provenance contracts; adapter expectations]
+    verification: []
+
+  - path: docs/machine-integration-map.md
+    purpose: Machine/data/protocol matrix and replaceable-adapter contract (OPC UA, MTConnect, file/API).
+    version: v0.1.0
+    last_reviewed: 2026-08-30T00:00:00Z
+    change_risk: medium
+    breaks_if_changed: [adapter normalization and acceptance tests]
+    verification: []
+
+  - path: docs/qa-qc-plan.md
+    purpose: Verification/validation/UQ distinction, quality gates, invariants, test layers, golden scenarios.
+    version: v0.1.0
+    last_reviewed: 2026-08-30T00:00:00Z
+    change_risk: medium
+    breaks_if_changed: [invariant test expectations; CI gates]
+    verification: []
+
+  - path: docs/seed-data-research.md
+    purpose: Approved seed-data sources, acquisition controls, license findings, parameter labeling.
+    version: v0.1.0
+    last_reviewed: 2026-08-30T00:00:00Z
+    change_risk: low
+    breaks_if_changed: [external-data provenance and download scripts]
+    verification: []
+
+  - path: docs/agent-navigation-and-indexing.md
+    purpose: File-index contract, risk classification, agent behavioral rules, change template.
+    version: v0.1.0
+    last_reviewed: 2026-08-30T00:00:00Z
+    change_risk: low
+    breaks_if_changed: [agent navigation and index maintenance policy]
+    verification: []
+
+  - path: tests/unit/test_sanity.py
+    purpose: Package sanity — version resolves and factory config loads with six stations.
+    version: v0.1.0
+    last_reviewed: 2026-08-30T00:00:00Z
+    change_risk: low
+    breaks_if_changed: [package import name; config/factory.yaml workstation list]
+    verification: [make test-unit]
 
   - path: docs/factory-process.md
     purpose: Generic investment-casting reference line spec; six MVP stations; claim discipline.
@@ -130,7 +186,7 @@ entries:
     last_reviewed: 2026-08-30T00:00:00Z
     change_risk: medium
     breaks_if_changed:
-      - src/archify/provenance/ field contracts
+      - src/crucible/provenance/ field contracts
       - schema of every event envelope
     verification: []
 
@@ -152,7 +208,7 @@ entries:
     verification: []
 
   - path: docs/milestones.md
-    purpose: Milestone plan and status (M0 done; M2/M4/M6 active; M3/M5/M7/M8 deferred).
+    purpose: Milestone plan and status (M0 done; M1 in progress; M2/M3/M4/M6 critical path; M5/M7/M8 deferred).
     version: v0.1.0
     last_reviewed: 2026-08-30T00:00:00Z
     change_risk: low

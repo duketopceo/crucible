@@ -130,7 +130,7 @@ MVP storage: PostgreSQL first, with TimescaleDB only if telemetry query volume w
   },
   "provenance": {
     "synthetic": true,
-    "simulation_run_id": "aft-20260830-001",
+    "simulation_run_id": "sim-20260830-001",
     "generator": "crucible-sim-v0.1.0",
     "random_seed": 42,
     "parameter_profile": "baseline-v1"
@@ -275,12 +275,14 @@ later industrial profile:
 
 The core simulator must work without Docker and without any LLM key. Compose services require health checks and should start only after critical dependencies are healthy.
 
-## Documentation added by this PR
+## Documentation map
 
-- `docs/technical-research-foundation.md` — this technical baseline
-- `docs/machine-integration-map.md` — machine, data, protocol, and adapter matrix
-- `docs/qa-qc-plan.md` — test strategy, invariants, acceptance evidence, and known limits
-- `docs/agent-navigation-and-indexing.md` — file-index contract and agent workflow
-- `docs/seed-data-research.md` — permitted seed-data uses, acquisition controls, and gaps
+- `ROADMAP.md` — the build plan: milestones, work orders, build order, portfolio presentation.
+- `docs/technical-research-foundation.md` — this technical baseline (research, architecture, envelope, protocols).
+- `docs/factory-process.md` — the generic reference line and six-station MVP spec.
+- `docs/machine-integration-map.md` — machine, data, protocol, and adapter matrix.
+- `docs/qa-qc-plan.md` — test strategy, invariants, acceptance evidence, and known limits.
+- `docs/agent-navigation-and-indexing.md` — file-index contract and agent workflow.
+- `docs/seed-data-research.md` — permitted seed-data uses, acquisition controls, and gaps.
 
-Use these documents as the input for milestone and GitHub issue creation. Each implementation issue should reference its owning document section and include acceptance criteria, test evidence, affected contracts, data-provenance impact, and required index changes.
+Each implementation issue references its owning document section and includes acceptance criteria, test evidence, affected contracts, data-provenance impact, and required index changes.
