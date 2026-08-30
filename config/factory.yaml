@@ -1,0 +1,58 @@
+# ── Crucible factory model ──────────────────────────────────────────────────
+# Generic investment-casting REFERENCE LINE. Not SpaceX. Not any real foundry.
+# Every numeric parameter added here MUST be registered in
+# docs/assumptions-register.md with a tag:
+#   source_backed | derived | assumption | sensitivity_only | unvalidated
+# ────────────────────────────────────────────────────────────────────────────
+
+schema_version: "1.0"
+
+site:
+  site_id: archify-reference-01
+  description: >
+    Generic high-temperature investment-casting reference line producing
+    blades, vanes, and test coupons. Motivating context only — no claim of
+    representing any real facility.
+
+# Six core simulated workstations (M2). Upstream (receiving, core, pattern)
+# and downstream (packing, shipment) are genealogy records initially.
+workstations:
+  - id: shell-building
+    area: shell
+    capacity: 4            # concurrent mold clusters — assumption, pending M2 register entry
+    outputs: [shell_batch]
+  - id: preheat
+    area: thermal
+    capacity: 2
+    inputs: [shell_batch]
+    outputs: [mold_ready]
+  - id: vacuum-melt-pour
+    area: melt
+    capacity: 1
+    equipment: [vacuum-furnace-01]
+    outputs: [cast_part_serials]
+  - id: controlled-solidification
+    area: melt
+    capacity: 2
+    outputs: [solidified_serials]
+  - id: heat-treatment
+    area: thermal-treatment
+    capacity: 3            # batch process
+    outputs: [heat_treated_serials]
+  - id: machining-ndt-disposition
+    area: finishing
+    capacity: 2
+    outputs: [disposition]  # accept | rework | hold | scrap | conditional_release
+
+genealogy_upstream:          # recorded, not simulated (M2)
+  - receiving_quarantine
+  - ceramic_core
+  - wax_pattern
+  - cluster_assembly
+
+genealogy_downstream:        # recorded, not simulated (M2)
+  - packing
+  - shipment
+
+# Numeric parameters are added in M2 — each with an assumptions-register entry.
+parameters: {}

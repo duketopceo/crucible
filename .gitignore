@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.venv/
+.uv-cache/
+
+# Tooling caches
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+htmlcov/
+.coverage
+
+# Env & secrets
+.env
+.env.*
+!.env.example
+
+# External datasets — downloaded via script, never committed (license varies)
+data/external/*
+!data/external/.gitkeep
+
+# Run outputs (regenerable from seed)
+data/raw/*
+!data/raw/.gitkeep
+!data/raw/.gitkeep
+
+# OS / editor
+.DS_Store
+*.swp
+
+# Python caches
+.pytype/ .ruff_cache/
+
+# Dashboards build output (M6)
+dashboards/dist/
