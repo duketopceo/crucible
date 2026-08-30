@@ -1,0 +1,25 @@
+flowchart TB
+    subgraph LINE["ARCHIFY FOUNDRY TWIN — generic investment-casting line"]
+        direction LR
+        R["Receiving<br/>quarantine"] --> C["Ceramic<br/>core"] --> P["Wax<br/>pattern"] --> CL["Cluster<br/>assembly"]
+        CL --> SH["Shell<br/>building"] --> PH["Preheat"] --> MP["Vacuum<br/>melt/pour"] --> CS["Controlled<br/>solidification"]
+        CS --> KO["Knockout"] --> HT["Heat<br/>treatment"] --> MA["Machining"] --> ND["NDT<br/>FPI/RT/CT"] --> DI["Final<br/>disposition"] --> SP["Packing<br/>shipment"]
+    end
+
+    MVP["6 MVP STATIONS (simulated):<br/>Shell · Preheat · Melt/Pour · Solidification · Heat Treat · Machining+NDT+Disposition"]
+    UP["Upstream (receiving→cluster) & downstream (packing→shipment)<br/>= genealogy records, not simulated queues"]
+
+    LINE --> SIM["Discrete-event simulator (SimPy)<br/>owns truth: genealogy · capacity · quality · telemetry · disposition"]
+
+    SIM --> MQTT["MQTT transport (M4)"]
+    MQTT --> RAW["Raw event store<br/>Postgres · append-only"]
+    RAW --> MODEL["Modeled tables<br/>rebuildable from raw + config"]
+    MODEL --> MART["Analytics marts<br/>disposable · derived"]
+    MART --> DASH["Read-only API + dashboard (M6)<br/>every number traceable"]
+
+    SIM -.-> LLM["Optional OpenRouter (M7)<br/>proposes scenarios, writes narratives<br/>never mutates facts"]
+
+    style LINE fill:#eef4ff,stroke:#2563eb
+    style SIM fill:#fff7ed,stroke:#ea580c
+    style RAW fill:#f0fdf4,stroke:#16a34a
+    style DASH fill:#faf5ff,stroke:#9333ea

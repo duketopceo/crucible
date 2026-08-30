@@ -22,18 +22,9 @@ The motivating context is turbine-blade investment casting (SpaceX is building a
 
 ## Architecture
 
-```mermaid
-flowchart TD
-    R[Research ledger + assumptions register] --> F[Versioned factory model + parameter profiles]
-    F --> S[Python discrete-event simulator<br/>routing · queues · resources · genealogy · quality]
-    S --> O[OPC UA simulator]
-    S --> M[MQTT event transport]
-    O --> E[Raw append-only event store]
-    M --> E
-    E --> T[Modeled operational / genealogy / quality tables]
-    T --> A[Analytics marts + read-only API + dashboard]
-    A --> L[Optional OpenRouter gateway]
-```
+![Archify Foundry Twin — one-look map](docs/archify-map.png)
+
+Source: `docs/archify-map.mmd`.
 
 Three defining rules:
 

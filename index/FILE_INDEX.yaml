@@ -56,6 +56,14 @@ entries:
     breaks_if_changed: []
     verification: []
 
+  - path: docs/archify-map.mmd
+    purpose: Mermaid source for the one-look Archify map (factory line + data pipeline). Rendered to docs/archify-map.png.
+    version: v0.1.0
+    last_reviewed: 2026-08-30T00:00:00Z
+    change_risk: low
+    breaks_if_changed: [README architecture diagram (keep in sync with docs/archify-map.png)]
+    verification: []
+
   - path: LICENSE
     purpose: MIT license.
     version: v0.1.0

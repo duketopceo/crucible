@@ -30,6 +30,9 @@ EXCLUDED = {
     "uv.lock",
 }
 
+# Binary image artifacts (rendered diagrams) are not hand-indexed.
+EXCLUDED_SUFFIXES = (".png", ".jpg", ".jpeg", ".svg", ".gif", ".webp")
+
 # GitHub UI metadata is not project content and is not hand-indexed.
 EXCLUDED_PATHS = {
     ".github/PULL_REQUEST_TEMPLATE.md",
@@ -65,7 +68,7 @@ def main() -> int:
     missing = []
     for p in tracked_files():
         rel = str(p.relative_to(REPO_ROOT))
-        if p.name in EXCLUDED:
+        if p.name in EXCLUDED or rel.endswith(EXCLUDED_SUFFIXES):
             continue
         if rel in EXCLUDED_PATHS or rel.startswith(EXCLUDED_PREFIXES):
             continue
