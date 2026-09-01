@@ -1,203 +1,203 @@
-# ── File index ──────────────────────────────────────────────────────────────
-# One entry per tracked file. Verified by `scripts/build_indexes.py --verify`
-# (CI gate). Entries maintained by hand until the auto-generator lands.
-#
-# Rules:
-# - `breaks_if_changed` describes what breaks, not what the file contains.
-# - `verification` lists the tests that must pass after a change.
-# ────────────────────────────────────────────────────────────────────────────
-
 entries:
-  - path: AGENTS.md
-    purpose: Agent operating rules — navigation order, hard rules, workflow, verification gates.
-    version: v0.1.0
-    last_reviewed: 2026-08-30T00:00:00Z
-    change_risk: low
-    breaks_if_changed: [agent behavior expectations across all tasks]
-    verification: []
-
-  - path: README.md
-    purpose: Project overview, honest-claims policy, quick start, navigation entry point.
-    version: v0.1.0
-    last_reviewed: 2026-08-30T00:00:00Z
-    change_risk: low
-    breaks_if_changed: []
-    verification: []
-
-  - path: REPO_INDEX.md
-    purpose: Top-level map — directory purposes, change risk, key invariants, validation commands.
-    version: v0.1.0
-    last_reviewed: 2026-08-30T00:00:00Z
-    change_risk: low
-    breaks_if_changed: [agent navigation for every task]
-    verification: []
-
-  - path: CHANGELOG.md
-    purpose: Notable changes per version/work order.
-    version: v0.1.0
-    last_reviewed: 2026-08-30T00:00:00Z
-    change_risk: low
-    breaks_if_changed: []
-    verification: []
-
-  - path: LICENSE
-    purpose: MIT license.
-    version: v0.1.0
-    last_reviewed: 2026-08-30T00:00:00Z
-    change_risk: low
-    breaks_if_changed: []
-    verification: []
-
-  - path: pyproject.toml
-    purpose: Package metadata and dependencies (pydantic, pyyaml; simpy/transport/api/dev extras).
-    version: v0.1.0
-    last_reviewed: 2026-08-30T00:00:00Z
-    change_risk: medium
-    breaks_if_changed:
-      - dependency resolution and lockfile
-      - lint/type/pytest configuration behavior
-    verification: [make lint, make type]
-
-  - path: Makefile
-    purpose: Validation entry points — check, test, indexes, simulate, replay-check.
-    version: v0.1.0
-    last_reviewed: 2026-08-30T00:00:00Z
-    change_risk: medium
-    breaks_if_changed: [CI steps invoking make targets]
-    verification: [make check]
-
-  - path: .env.example
-    purpose: Placeholder environment template. Never put real values here.
-    version: v0.1.0
-    last_reviewed: 2026-08-30T00:00:00Z
-    change_risk: low
-    breaks_if_changed: []
-    verification: []
-
-  - path: .gitignore
-    purpose: Excludes env/secrets, external datasets, regenerable run outputs, caches.
-    version: v0.1.0
-    last_reviewed: 2026-08-30T00:00:00Z
-    change_risk: low
-    breaks_if_changed: [accidental commit of secrets or datasets if weakened]
-    verification: []
-
-  - path: .github/workflows/ci.yml
-    purpose: CI — lint, type, unit tests, index freshness.
-    version: v0.1.0
-    last_reviewed: 2026-08-30T00:00:00Z
-    change_risk: medium
-    breaks_if_changed: [CI gating on push/PR]
-    verification: [make check]
-
-  - path: index/FILE_INDEX.yaml
-    purpose: Per-file index (this file); freshness-verified in CI.
-    version: v0.1.0
-    last_reviewed: 2026-08-30T00:00:00Z
-    change_risk: low
-    breaks_if_changed: [index freshness verification]
-    verification: [make indexes-verify]
-
-  - path: index/AGENT_NAVIGATION.md
-    purpose: Task-type → path routing with per-task-type non-negotiables.
-    version: v0.1.0
-    last_reviewed: 2026-08-30T00:00:00Z
-    change_risk: low
-    breaks_if_changed: [agent routing for new tasks]
-    verification: []
-
-  - path: docs/architecture.md
-    purpose: Layered architecture, defining rules, source-of-truth hierarchy, ISA-95 alignment.
-    version: v0.1.0
-    last_reviewed: 2026-08-30T00:00:00Z
-    change_risk: low
-    breaks_if_changed: [architectural expectations in AGENTS.md and work orders]
-    verification: []
-
-  - path: docs/factory-process.md
-    purpose: Generic investment-casting reference line spec; six MVP stations; claim discipline.
-    version: v0.1.0
-    last_reviewed: 2026-08-30T00:00:00Z
-    change_risk: medium
-    breaks_if_changed:
-      - config/factory.yaml workstation model (keep in sync)
-      - docs/assumptions-register.md parameter IDs
-    verification: []
-
-  - path: docs/data-provenance.md
-    purpose: Provenance policy — mandatory fields, data categories, append-only rules.
-    version: v0.1.0
-    last_reviewed: 2026-08-30T00:00:00Z
-    change_risk: medium
-    breaks_if_changed:
-      - src/archify/provenance/ field contracts
-      - schema of every event envelope
-    verification: []
-
-  - path: docs/assumptions-register.md
-    purpose: Registry of every numeric parameter with source tag (source_backed..unvalidated).
-    version: v0.1.0
-    last_reviewed: 2026-08-30T00:00:00Z
-    change_risk: medium
-    breaks_if_changed:
-      - provenance of simulation outputs (must stay in sync with config/)
-    verification: []
-
-  - path: docs/work-orders.md
-    purpose: Work-order backlog with acceptance criteria and definition of done.
-    version: v0.1.0
-    last_reviewed: 2026-08-30T00:00:00Z
-    change_risk: low
-    breaks_if_changed: []
-    verification: []
-
-  - path: docs/milestones.md
-    purpose: Milestone plan and status (M0 done; M2/M4/M6 active; M3/M5/M7/M8 deferred).
-    version: v0.1.0
-    last_reviewed: 2026-08-30T00:00:00Z
-    change_risk: low
-    breaks_if_changed: []
-    verification: []
-
-  - path: config/factory.yaml
-    purpose: Versioned generic reference-line factory model (site, six stations, genealogy edges).
-    version: v0.1.0
-    last_reviewed: 2026-08-30T00:00:00Z
-    change_risk: high
-    breaks_if_changed:
-      - simulation routing and station contracts (M2+)
-      - docs/factory-process.md sync
-      - docs/assumptions-register.md parameter IDs
-    verification: []
-
-  - path: scripts/build_indexes.py
-    purpose: CI gate — verifies every tracked file has a FILE_INDEX.yaml entry.
-    version: v0.1.0
-    last_reviewed: 2026-08-30T00:00:00Z
-    change_risk: medium
-    breaks_if_changed: [index freshness gate in CI]
-    verification: [make indexes-verify]
-
-  - path: scripts/run_simulation.py
-    purpose: Stub — fixed-seed simulation entry point; implemented in WO-006 (M2).
-    version: v0.1.0
-    last_reviewed: 2026-08-30T00:00:00Z
-    change_risk: low
-    breaks_if_changed: []
-    verification: []
-
-  - path: scripts/validate_run.py
-    purpose: Stub — replay determinism + invariant validation; implemented in WO-005/006 (M2).
-    version: v0.1.0
-    last_reviewed: 2026-08-30T00:00:00Z
-    change_risk: low
-    breaks_if_changed: []
-    verification: []
-
-  - path: data/README.md
-    purpose: Explains data/external and data/raw are uncommitted and regenerable.
-    version: v0.1.0
-    last_reviewed: 2026-08-30T00:00:00Z
-    change_risk: low
-    breaks_if_changed: []
-    verification: []
+- path: AGENTS.md
+  purpose: "Agent operating rules \u2014 navigation order, hard rules, workflow, verification\
+    \ gates."
+  version: v0.1.0
+  last_reviewed: 2026-08-30 00:00:00+00:00
+  change_risk: low
+  breaks_if_changed:
+  - agent behavior expectations across all tasks
+  verification: []
+- path: README.md
+  purpose: Project overview, honest-claims policy, quick start, navigation entry point.
+  version: v0.1.0
+  last_reviewed: 2026-08-30 00:00:00+00:00
+  change_risk: low
+  breaks_if_changed: []
+  verification: []
+- path: REPO_INDEX.md
+  purpose: "Top-level map \u2014 directory purposes, change risk, key invariants,\
+    \ validation commands."
+  version: v0.1.0
+  last_reviewed: 2026-08-30 00:00:00+00:00
+  change_risk: low
+  breaks_if_changed:
+  - agent navigation for every task
+  verification: []
+- path: CHANGELOG.md
+  purpose: Notable changes per version/work order.
+  version: v0.1.0
+  last_reviewed: 2026-08-30 00:00:00+00:00
+  change_risk: low
+  breaks_if_changed: []
+  verification: []
+- path: LICENSE
+  purpose: MIT license.
+  version: v0.1.0
+  last_reviewed: 2026-08-30 00:00:00+00:00
+  change_risk: low
+  breaks_if_changed: []
+  verification: []
+- path: pyproject.toml
+  purpose: Package metadata and dependencies (pydantic, pyyaml; simpy/transport/api/dev
+    extras).
+  version: v0.1.0
+  last_reviewed: 2026-08-30 00:00:00+00:00
+  change_risk: medium
+  breaks_if_changed:
+  - dependency resolution and lockfile
+  - lint/type/pytest configuration behavior
+  verification:
+  - make lint
+  - make type
+- path: Makefile
+  purpose: "Validation entry points \u2014 check, test, indexes, simulate, replay-check."
+  version: v0.1.0
+  last_reviewed: 2026-08-30 00:00:00+00:00
+  change_risk: medium
+  breaks_if_changed:
+  - CI steps invoking make targets
+  verification:
+  - make check
+- path: .env.example
+  purpose: Placeholder environment template. Never put real values here.
+  version: v0.1.0
+  last_reviewed: 2026-08-30 00:00:00+00:00
+  change_risk: low
+  breaks_if_changed: []
+  verification: []
+- path: .gitignore
+  purpose: Excludes env/secrets, external datasets, regenerable run outputs, caches.
+  version: v0.1.0
+  last_reviewed: 2026-08-30 00:00:00+00:00
+  change_risk: low
+  breaks_if_changed:
+  - accidental commit of secrets or datasets if weakened
+  verification: []
+- path: .github/workflows/ci.yml
+  purpose: "CI \u2014 lint, type, unit tests, index freshness."
+  version: v0.1.0
+  last_reviewed: 2026-08-30 00:00:00+00:00
+  change_risk: medium
+  breaks_if_changed:
+  - CI gating on push/PR
+  verification:
+  - make check
+- path: index/FILE_INDEX.yaml
+  purpose: Per-file index (this file); freshness-verified in CI.
+  version: v0.1.0
+  last_reviewed: 2026-08-30 00:00:00+00:00
+  change_risk: low
+  breaks_if_changed:
+  - index freshness verification
+  verification:
+  - make indexes-verify
+- path: index/AGENT_NAVIGATION.md
+  purpose: "Task-type \u2192 path routing with per-task-type non-negotiables."
+  version: v0.1.0
+  last_reviewed: 2026-08-30 00:00:00+00:00
+  change_risk: low
+  breaks_if_changed:
+  - agent routing for new tasks
+  verification: []
+- path: docs/architecture.md
+  purpose: Layered architecture, defining rules, source-of-truth hierarchy, ISA-95
+    alignment.
+  version: v0.1.0
+  last_reviewed: 2026-08-30 00:00:00+00:00
+  change_risk: low
+  breaks_if_changed:
+  - architectural expectations in AGENTS.md and work orders
+  verification: []
+- path: docs/factory-process.md
+  purpose: Generic investment-casting reference line spec; six MVP stations; claim
+    discipline.
+  version: v0.1.0
+  last_reviewed: 2026-08-30 00:00:00+00:00
+  change_risk: medium
+  breaks_if_changed:
+  - config/factory.yaml workstation model (keep in sync)
+  - docs/assumptions-register.md parameter IDs
+  verification: []
+- path: docs/data-provenance.md
+  purpose: "Provenance policy \u2014 mandatory fields, data categories, append-only\
+    \ rules."
+  version: v0.1.0
+  last_reviewed: 2026-08-30 00:00:00+00:00
+  change_risk: medium
+  breaks_if_changed:
+  - src/archify/provenance/ field contracts
+  - schema of every event envelope
+  verification: []
+- path: docs/assumptions-register.md
+  purpose: Registry of every numeric parameter with source tag (source_backed..unvalidated).
+  version: v0.1.0
+  last_reviewed: 2026-08-30 00:00:00+00:00
+  change_risk: medium
+  breaks_if_changed:
+  - provenance of simulation outputs (must stay in sync with config/)
+  verification: []
+- path: docs/work-orders.md
+  purpose: Work-order backlog with acceptance criteria and definition of done.
+  version: v0.1.0
+  last_reviewed: 2026-08-30 00:00:00+00:00
+  change_risk: low
+  breaks_if_changed: []
+  verification: []
+- path: docs/milestones.md
+  purpose: Milestone plan and status (M0 done; M2/M4/M6 active; M3/M5/M7/M8 deferred).
+  version: v0.1.0
+  last_reviewed: 2026-08-30 00:00:00+00:00
+  change_risk: low
+  breaks_if_changed: []
+  verification: []
+- path: config/factory.yaml
+  purpose: Versioned generic reference-line factory model (site, six stations, genealogy
+    edges).
+  version: v0.1.0
+  last_reviewed: 2026-08-30 00:00:00+00:00
+  change_risk: high
+  breaks_if_changed:
+  - simulation routing and station contracts (M2+)
+  - docs/factory-process.md sync
+  - docs/assumptions-register.md parameter IDs
+  verification: []
+- path: scripts/build_indexes.py
+  purpose: "CI gate \u2014 verifies every tracked file has a FILE_INDEX.yaml entry."
+  version: v0.1.0
+  last_reviewed: 2026-08-30 00:00:00+00:00
+  change_risk: medium
+  breaks_if_changed:
+  - index freshness gate in CI
+  verification:
+  - make indexes-verify
+- path: scripts/run_simulation.py
+  purpose: "Stub \u2014 fixed-seed simulation entry point; implemented in WO-006 (M2)."
+  version: v0.1.0
+  last_reviewed: 2026-08-30 00:00:00+00:00
+  change_risk: low
+  breaks_if_changed: []
+  verification: []
+- path: scripts/validate_run.py
+  purpose: "Stub \u2014 replay determinism + invariant validation; implemented in\
+    \ WO-005/006 (M2)."
+  version: v0.1.0
+  last_reviewed: 2026-08-30 00:00:00+00:00
+  change_risk: low
+  breaks_if_changed: []
+  verification: []
+- path: data/README.md
+  purpose: Explains data/external and data/raw are uncommitted and regenerable.
+  version: v0.1.0
+  last_reviewed: 2026-08-30 00:00:00+00:00
+  change_risk: low
+  breaks_if_changed: []
+  verification: []
+- path: tests/unit/test_sanity.py
+  purpose: "Package sanity test \u2014 version loads, factory config parses and has\
+    \ six stations."
+  version: v0.1.0
+  last_reviewed: '2026-08-30T00:00:00Z'
+  change_risk: low
+  breaks_if_changed: []
+  verification: []

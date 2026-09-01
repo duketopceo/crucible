@@ -21,11 +21,17 @@ import yaml
 REPO_ROOT = Path(__file__).resolve().parent.parent
 INDEX_PATH = REPO_ROOT / "index" / "FILE_INDEX.yaml"
 
-# Files that never need index entries.
-EXCLUDED = {
+# Files that never need index entries: VCS metadata, empty package markers,
+# lockfiles, and other regenerated artifacts.
+EXCLUDED_NAMES = {
     ".gitkeep",
     ".DS_Store",
+    "__init__.py",
+    "uv.lock",
 }
+EXCLUDED_PREFIXES = (
+    ".github/",
+)
 
 
 def tracked_files() -> list[Path]:
@@ -56,7 +62,9 @@ def main() -> int:
     missing = [
         str(p.relative_to(REPO_ROOT))
         for p in tracked_files()
-        if p.name not in EXCLUDED and str(p.relative_to(REPO_ROOT)) not in indexed
+        if p.name not in EXCLUDED_NAMES
+        and not str(p.relative_to(REPO_ROOT)).startswith(EXCLUDED_PREFIXES)
+        and str(p.relative_to(REPO_ROOT)) not in indexed
     ]
 
     if missing:
