@@ -6,11 +6,11 @@ from pathlib import Path
 
 import yaml
 
-import archify
+import crucible
 
 
 def test_version() -> None:
-    assert archify.__version__ == "0.1.0"
+    assert crucible.__version__ == "0.1.0"
 
 
 def test_factory_config_loads() -> None:

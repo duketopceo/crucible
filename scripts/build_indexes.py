@@ -33,6 +33,18 @@ EXCLUDED_PREFIXES = (
     ".github/",
 )
 
+# Binary image artifacts (rendered diagrams) are not hand-indexed.
+EXCLUDED_SUFFIXES = (
+    ".png", ".jpg", ".jpeg", ".svg", ".gif", ".webp"
+)
+
+# GitHub UI metadata is not project content and is not hand-indexed.
+EXCLUDED_PATHS = {
+    ".github/PULL_REQUEST_TEMPLATE.md",
+}
+EXCLUDED_PREFIXES = (
+    ".github/ISSUE_TEMPLATE/",
+)
 
 def tracked_files() -> list[Path]:
     out = subprocess.run(
@@ -64,6 +76,9 @@ def main() -> int:
         for p in tracked_files()
         if p.name not in EXCLUDED_NAMES
         and not str(p.relative_to(REPO_ROOT)).startswith(EXCLUDED_PREFIXES)
+        and not p.name.endswith(EXCLUDED_SUFFIXES)
+        and not str(p.relative_to(REPO_ROOT)) in EXCLUDED_PATHS
+        and not str(p.relative_to(REPO_ROOT)).startswith(tuple(EXCLUDED_PREFIXES))
         and str(p.relative_to(REPO_ROOT)) not in indexed
     ]
 

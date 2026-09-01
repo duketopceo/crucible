@@ -10,7 +10,7 @@ Every record answers: **was this measured, imported, derived, or generated?** â€
 | `source_type` | `simulation` \| `external_reference` \| `research_claim` \| `generated_context` |
 | `source_id` / `source_version` | origin identifier and version (e.g. dataset DOI, config file version) |
 | `simulation_run_id` | run that produced the record |
-| `model_version` | archify package version that generated it |
+| `model_version` | crucible package version that generated it |
 | `parameter_profile` | named profile in `config/` (e.g. `baseline-v1`) |
 | `random_seed` | seed for the producing run |
 | `occurred_at` / `ingested_at` | simulated event time vs real ingestion time |
