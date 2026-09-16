@@ -77,7 +77,7 @@ def main() -> int:
         if p.name not in EXCLUDED_NAMES
         and not str(p.relative_to(REPO_ROOT)).startswith(EXCLUDED_PREFIXES)
         and not p.name.endswith(EXCLUDED_SUFFIXES)
-        and not str(p.relative_to(REPO_ROOT)) in EXCLUDED_PATHS
+        and str(p.relative_to(REPO_ROOT)) not in EXCLUDED_PATHS
         and not str(p.relative_to(REPO_ROOT)).startswith(tuple(EXCLUDED_PREFIXES))
         and str(p.relative_to(REPO_ROOT)) not in indexed
     ]
