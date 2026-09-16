@@ -17,13 +17,10 @@ from __future__ import annotations
 
 import argparse
 import datetime
-import hashlib
 import os
-import re
 import subprocess
 import sys
 from pathlib import Path
-from typing import Dict, List, Tuple
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 INDEX_PATH = REPO_ROOT / "INDEX.md"
@@ -61,7 +58,6 @@ COLUMNS = ["Path", "Version", "Last updated", "What it is", "Why it's here", "De
 
 def is_ignored(path: Path) -> bool:
     rel = path.relative_to(REPO_ROOT)
-    parts = set(rel.parts)
     if any(part in IGNORED_GLOBS for part in rel.parts):
         return True
     if any(part.startswith(".") and part in IGNORED_GLOBS for part in rel.parts):
@@ -72,7 +68,7 @@ def is_ignored(path: Path) -> bool:
     return False
 
 
-def git_tracked_files() -> List[Path]:
+def git_tracked_files() -> list[Path]:
     out = subprocess.run(
         ["git", "-C", str(REPO_ROOT), "ls-files"],
         capture_output=True,
@@ -83,10 +79,10 @@ def git_tracked_files() -> List[Path]:
     return [p for p in files if p.is_file() and not is_ignored(p)]
 
 
-def build_file_mtime_index(targets: List[Path]) -> Dict[str, str]:
+def build_file_mtime_index(targets: list[Path]) -> dict[str, str]:
     """One git log pass: newest-first, assign first-seen commit date to each file."""
     rel_set = {str(p.relative_to(REPO_ROOT)) for p in targets}
-    mtimes: Dict[str, str] = {}
+    mtimes: dict[str, str] = {}
     out = subprocess.run(
         ["git", "-C", str(REPO_ROOT), "log", "--name-only", "--format=%ct"],
         capture_output=True,
@@ -98,7 +94,8 @@ def build_file_mtime_index(targets: List[Path]) -> Dict[str, str]:
         if not line:
             continue
         if line.isdigit():
-            current_ts = datetime.datetime.fromtimestamp(int(line), tz=datetime.timezone.utc).isoformat()[:19]
+            ts = int(line)
+            current_ts = datetime.datetime.fromtimestamp(ts, tz=datetime.UTC).isoformat()[:16]
             continue
         if line in rel_set and line not in mtimes:
             mtimes[line] = current_ts
@@ -113,14 +110,14 @@ def repo_version() -> str:
     return "1.0.0"
 
 
-def parse_existing_index() -> Dict[str, Dict[str, str]]:
+def parse_existing_index() -> dict[str, dict[str, str]]:
     """Parse the current INDEX.md for hand-maintained per-file metadata."""
-    existing: Dict[str, Dict[str, str]] = {}
+    existing: dict[str, dict[str, str]] = {}
     if not INDEX_PATH.exists():
         return existing
 
     in_table = False
-    table_lines: List[str] = []
+    table_lines: list[str] = []
     for raw in INDEX_PATH.read_text().splitlines():
         if raw.startswith("| ") and " | " in raw:
             in_table = True
@@ -157,20 +154,17 @@ def parse_existing_index() -> Dict[str, Dict[str, str]]:
     return existing
 
 
-def discover_files() -> List[Path]:
+def discover_files() -> list[Path]:
     files = git_tracked_files()
     files.sort()
     return files
 
 
-def files_by_directory(files: List[Path]) -> Dict[Path, List[Path]]:
-    buckets: Dict[Path, List[Path]] = {}
+def files_by_directory(files: list[Path]) -> dict[Path, list[Path]]:
+    buckets: dict[Path, list[Path]] = {}
     for f in files:
         rel = f.relative_to(REPO_ROOT)
-        if rel.parts:
-            top = Path(rel.parts[0])
-        else:
-            top = Path(".")
+        top = Path(rel.parts[0]) if rel.parts else Path(".")
         buckets.setdefault(top, []).append(f)
     return buckets
 
@@ -184,13 +178,13 @@ def humanize(cell: str, max_len: int = 80) -> str:
 
 def build_index_content() -> str:
     version = repo_version()
-    now = datetime.datetime.now(datetime.timezone.utc).isoformat()
+    now = datetime.datetime.now(datetime.UTC).isoformat()
     files = discover_files()
     existing = parse_existing_index()
     mtimes = build_file_mtime_index(files)
 
     # Map every file to its metadata
-    rows: List[Tuple[str, str, str, str, str, str]] = []
+    rows: list[tuple[str, str, str, str, str, str]] = []
     for f in files:
         rel = str(f.relative_to(REPO_ROOT))
         meta = existing.get(rel, {})
@@ -201,7 +195,7 @@ def build_index_content() -> str:
         rows.append((rel, version, last, what, why, depends))
 
     # Group by top-level directory
-    top_dirs: Dict[str, List[Tuple[str, str, str, str, str, str]]] = {}
+    top_dirs: dict[str, list[tuple[str, str, str, str, str, str]]] = {}
     for row in rows:
         parts = row[0].split("/")
         top = parts[0] if len(parts) > 1 else "."
@@ -210,7 +204,7 @@ def build_index_content() -> str:
     out = [
         "# INDEX.md — Luke Grounding Index",
         "",
-        f"> **Index version:** `v2.0.0`",
+        "> **Index version:** `v2.0.0`",
         f"> **Repo version:** `{version}`",
         f"> **Last synced:** `{now}`",
         "> **Schema:** `Path | Version | Last updated | What it is | Why it's here | Depends on`",
@@ -223,8 +217,10 @@ def build_index_content() -> str:
         "## 1. Security & Leak Risk",
         "",
         "> [!IMPORTANT]",
-        "> Run `python scripts/luke-index-watcher.py` after any non-trivial repo change to keep this index current.",
-        "> Never commit live keys, tokens, or PII. See `GUARDRAILS.md` §6 and `SECURITY_GUIDELINES.md`.",
+        "> Run `python scripts/luke-index-watcher.py` after any non-trivial repo",
+        "> change to keep this index current.",
+        "> Never commit live keys, tokens, or PII. See `GUARDRAILS.md` §6 and",
+        "> `SECURITY_GUIDELINES.md`.",
         "",
         "---",
         "",
@@ -242,7 +238,8 @@ def build_index_content() -> str:
         out.append("")
         if len(entries) > MAX_FILES_BEFORE_DELEGATE:
             out.append(
-                f"Directory `{top}/` contains {len(entries)} files. Listing the first 50; full drill-down is delegated to sub-indexes or `git ls-files {top}`."
+                f"Directory `{top}/` contains {len(entries)} files. Listing the first 50; "
+                f"full drill-down is delegated to sub-indexes or `git ls-files {top}`."
             )
             out.append("")
             entries = entries[:50]
@@ -252,7 +249,7 @@ def build_index_content() -> str:
     return "\n".join(out) + "\n"
 
 
-def make_table(rows: List[Tuple[str, str, str, str, str, str]]) -> str:
+def make_table(rows: list[tuple[str, str, str, str, str, str]]) -> str:
     if not rows:
         return "_No files in this section._"
     header = "| " + " | ".join(COLUMNS) + " |"
