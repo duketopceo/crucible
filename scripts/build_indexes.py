@@ -29,22 +29,17 @@ EXCLUDED_NAMES = {
     "__init__.py",
     "uv.lock",
 }
-EXCLUDED_PREFIXES = (
-    ".github/",
-)
+EXCLUDED_PREFIXES = (".github/",)
 
 # Binary image artifacts (rendered diagrams) are not hand-indexed.
-EXCLUDED_SUFFIXES = (
-    ".png", ".jpg", ".jpeg", ".svg", ".gif", ".webp"
-)
+EXCLUDED_SUFFIXES = (".png", ".jpg", ".jpeg", ".svg", ".gif", ".webp")
 
 # GitHub UI metadata is not project content and is not hand-indexed.
 EXCLUDED_PATHS = {
     ".github/PULL_REQUEST_TEMPLATE.md",
 }
-EXCLUDED_PREFIXES = (
-    ".github/ISSUE_TEMPLATE/",
-)
+EXCLUDED_PREFIXES = (".github/ISSUE_TEMPLATE/",)
+
 
 def tracked_files() -> list[Path]:
     out = subprocess.run(

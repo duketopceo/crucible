@@ -280,7 +280,7 @@ def check() -> bool:
 def install_hook() -> None:
     hooks_dir = REPO_ROOT / ".git" / "hooks"
     hook_path = hooks_dir / "pre-commit"
-    cmd = 'python3 scripts/luke-index-watcher.py && git add INDEX.md\n'
+    cmd = "python3 scripts/luke-index-watcher.py && git add INDEX.md\n"
     if hook_path.exists():
         text = hook_path.read_text()
         if cmd not in text:
