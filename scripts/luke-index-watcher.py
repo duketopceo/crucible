@@ -95,7 +95,7 @@ def build_file_mtime_index(targets: list[Path]) -> dict[str, str]:
             continue
         if line.isdigit():
             ts = int(line)
-            current_ts = datetime.datetime.fromtimestamp(ts, tz=datetime.UTC).isoformat()[:16]
+            current_ts = datetime.datetime.fromtimestamp(ts, tz=datetime.timezone.utc).isoformat()[:16]
             continue
         if line in rel_set and line not in mtimes:
             mtimes[line] = current_ts
@@ -178,7 +178,7 @@ def humanize(cell: str, max_len: int = 80) -> str:
 
 def build_index_content() -> str:
     version = repo_version()
-    now = datetime.datetime.now(datetime.UTC).isoformat()
+    now = datetime.datetime.now(datetime.timezone.utc).isoformat()
     files = discover_files()
     existing = parse_existing_index()
     mtimes = build_file_mtime_index(files)
