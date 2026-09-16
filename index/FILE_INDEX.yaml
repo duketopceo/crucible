@@ -273,3 +273,18 @@ entries:
     change_risk: low
     breaks_if_changed: []
     verification: []
+
+  - path: INDEX.md
+    purpose: Auto-generated repo grounding index for AI agents (watcher output).
+    depends_on: [scripts/luke-index-watcher.py]
+    consumed_by: []
+    breaks_if_changed: []
+    generated: true
+    last_reviewed: 2026-09-15
+  - path: scripts/luke-index-watcher.py
+    purpose: Regenerates INDEX.md after non-trivial repo changes; hookable as pre-commit.
+    depends_on: []
+    consumed_by: [.github/workflows/ci.yml]
+    breaks_if_changed: [INDEX.md]
+    generated: false
+    last_reviewed: 2026-09-15
