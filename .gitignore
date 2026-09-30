@@ -37,3 +37,5 @@ data/raw/*
 
 # Dashboards build output (M6)
 dashboards/dist/
+
+.codebase-memory/
