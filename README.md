@@ -1,3 +1,7 @@
+<p align="center"><img src="assets/brand/wordmark.svg" alt="Crucible" width="280"></p>
+
+<p align="center"><sub>Logo is a proposal pending owner sign-off.</sub></p>
+
 # Crucible
 
 > Crucible is a research-grounded synthetic industrial-data platform. Its first reference model, **Archify Foundry Twin**, simulates a generic investment-casting line, preserves material genealogy, emits industrial-style events, and demonstrates quality and reliability decisions — without claiming access to real factory data.
@@ -32,7 +36,9 @@ Three defining rules:
 2. **Every number is traceable** to an event, model version, seed, parameter profile, and evidence status.
 3. **Raw events are immutable; modeled tables are rebuildable** from raw events + versioned reference data.
 
-## Quick start (M4+, not yet active)
+## Quick start
+
+Today only the checks run (`uv sync --all-extras && make check`); `make simulate` is a stub. The commands below arrive with M4:
 
 ```bash
 cp .env.example .env
@@ -42,9 +48,11 @@ make simulate   # offline, fixed seed, no services required
 
 ## Navigation
 
-- `ROADMAP.md` — the build plan: milestones, work orders, portfolio presentation.
+- `ROADMAP.md` — program roadmap (Now/Next/Later) then the build plan: milestones, work orders, portfolio presentation.
 - `REPO_INDEX.md` — start here; maps every directory and key file.
 - `index/FILE_INDEX.yaml` — machine-readable per-file index (purpose, deps, break risk).
+- `DESIGN.md` — design direction ("Heat Log"); `assets/brand/` — logo proposal.
+- `docs/research/` — landscape research.
 - `docs/` — technical research foundation, factory process, provenance, assumptions, work orders, QA/QC.
 - `config/` — versioned factory model, recipes, defect model, reliability profiles.
 - `src/crucible/` — the Python package (domain, simulation, events, provenance, adapters).
@@ -63,3 +71,7 @@ There is no running dashboard yet — analytics and the embedded dashboard land 
 ## License
 
 MIT — see `LICENSE`.
+
+## Contributing
+
+See `CONTRIBUTING.md` and `AGENTS.md`. Run `make check` before opening a PR.

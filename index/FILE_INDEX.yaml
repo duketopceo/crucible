@@ -288,3 +288,35 @@ entries:
     breaks_if_changed: [INDEX.md]
     generated: false
     last_reviewed: 2026-09-15
+
+  - path: DESIGN.md
+    purpose: "Design direction (Heat Log): tokens, type, motion, surfaces."
+    version: v0.1.0
+    last_reviewed: 2026-10-11T00:00:00Z
+    change_risk: low
+    breaks_if_changed: []
+    verification: []
+
+  - path: assets/brand/README.md
+    purpose: Logo proposal construction notes.
+    version: v0.1.0
+    last_reviewed: 2026-10-11T00:00:00Z
+    change_risk: low
+    breaks_if_changed: []
+    verification: []
+
+  - path: docs/plans/2026-10-11-001-program-roadmap-plan.md
+    purpose: "Program roadmap plan: units U1-U8 with difficulty, feasibility, simpler alternatives."
+    version: v0.1.0
+    last_reviewed: 2026-10-11T00:00:00Z
+    change_risk: low
+    breaks_if_changed: []
+    verification: []
+
+  - path: docs/research/2026-10-10-landscape.md
+    purpose: "Landscape research: neighbouring simulators and platforms."
+    version: v0.1.0
+    last_reviewed: 2026-10-11T00:00:00Z
+    change_risk: low
+    breaks_if_changed: []
+    verification: []

@@ -1,3 +1,22 @@
+# Program roadmap (2026-10-11)
+
+Full plan with difficulty, feasibility and simpler alternatives per unit: [`docs/plans/2026-10-11-001-program-roadmap-plan.md`](docs/plans/2026-10-11-001-program-roadmap-plan.md).
+
+| Horizon | Unit | Difficulty |
+|---|---|---|
+| Now | U1 close M1 parameter register | easy |
+| Now | U2 canonical event envelope | easy |
+| Now | U3 deterministic six-station route (M2) | medium |
+| Next | U4 stochastic behaviour (M3) | medium |
+| Next | U5 CI for the real suite | easy |
+| Next | U6 MQTT publish and ingest (M4) | hard |
+| Later | U7 incident walkthrough dashboard (M6) | hard |
+| Later | U8 seed data, LLM layer, comparison (M5/M7/M8) | medium |
+
+The original build plan follows unchanged.
+
+---
+
 # Crucible — Roadmap and Build Plan
 
 > Crucible is a research-grounded synthetic industrial-data platform. Its first reference model, **Archify Foundry Twin**, simulates a generic high-temperature investment-casting line and demonstrates quality and reliability decisions without claiming access to real factory data.
