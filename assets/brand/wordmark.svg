@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 64" width="280" height="64" role="img" aria-label="Crucible (proposal)"><title>Crucible</title>
+<g><path d="M8 18H56L47.5 50.5Q46.8 53 44.2 53H19.8Q17.2 53 16.5 50.5Z" fill="#1C1917"/>
+<path d="M14 24H50L48.6 29H15.4Z" fill="#B8410A"/>
+<circle cx="32" cy="42" r="4.5" fill="#B8410A"/></g>
+<text x="76" y="43" font-family="ui-monospace, 'JetBrains Mono', 'Liberation Mono', 'DejaVu Sans Mono', monospace" font-size="32" font-weight="700" letter-spacing="1" fill="#1C1917">crucible</text>
+</svg>
